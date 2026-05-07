@@ -1,0 +1,1 @@
+shutdown /s /t 0 /csextou! Pode descansar
