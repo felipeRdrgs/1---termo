@@ -7,57 +7,109 @@ import time
 
 numero_vagas = 500
 vagas_ocupadas = 0
+multa_ticket = 50
 
-while True:
-    print("bem-vindo ao shopping pátio.")
-    horario = float(input("informe o horário de entrada."))
-    tipo_acesso = int(input("qual é seu tipo de acesso? \n 1- ticket \n 2- tag \n"))
+print("Bem-vindo ao shopping")
+
+
+horario = float(input("Informe o horário de entrada: "))
+tipo_acesso = int(input("Qual é seu tipo de acesso?\n1 - Ticket\n2 - TAG\n"))
+
+
+if vagas_ocupadas >= numero_vagas:
+    print("Estacionamento lotado. Aguarde.")
+else:
+
+    
     if tipo_acesso == 2:
-        print("Acesso via TAG liberado. Seja bem vindo! Seu horario de entrada foi", horario,)
-    elif tipo_acesso == 1:
-        if vagas_ocupadas < numero_vagas:
-            input("precione o botão a baixo.")
-        print("verificando vagas disponíveis...")
-        time.sleep(2)
-        print("vaga encontrada! pegue seu ticket e siga em frente. Seu horario de entrada foi:", horario,)
-        vagas_ocupadas += 1
-        break
-    else:
-        print("Estacionamnto lotado. aguarde.")
-    if tipo_acesso == 2:
+        print("Acesso via TAG liberado.")
+        print("Horário de entrada:", horario)
         print("Siga em frente.")
-        vagas_ocupadas += 1
-        print("vagas ocupadas:", vagas_ocupadas)
-        break
-valor = 0
 
-print("Saída do estacionamento.")
-print("saída sem ticket.")
-print("taxa: R$ 50,00")
-valor = 50
+    
+    elif tipo_acesso == 1:
+        input("Pressione o botão a baixo para retirar o ticket.")
+        print("Verificando vagas disponíveis...")
+        time.sleep(2)
 
-tempo = float(input("quantas horas você utilizou o estacionamnto?"))
-if tempo <= 0.25:
-        valor = 0
-        print("tempo de toleância. Gratuito.")
+        print("Vaga encontrada!")
+        print("Pegue seu ticket e siga em frente.")
+        print("Horário de entrada:", horario)
+
+    else:
+        print("Tipo de acesso inválido.")
+
+vagas_ocupadas += 1
+print("Vagas ocupadas:", vagas_ocupadas)
+
+print(" Saída do estacionamento")
+
+tempo = float(input("\nQuantas horas você utilizou o estacionamento? "))
+
+total_pagamento = 0
+
+    
+if tempo <= 0.15:
+    total_pagamento = 0
+    print("Tempo de tolerância. Gratuito.")
+
 elif tempo <= 3:
-        valor = 15
-        print("valor fixo de R$ 15.00.")
+        total_pagamento = 15
+        print("Valor fixo de R$15.00.")
+
 else:
-        horas_extras = int(tempo -3)
-        if tempo - 3 > horas_extras:
-            horas_extras += 1
-        print("Cobrança por horas extras aplicada.")
-tag = input("você possui TAG? \n 1-sim \n 2-não \n")
+    horas_extras = tempo - 3
+
+        
+if horas_extras != int(horas_extras):
+            horas_extras = int(horas_extras) + 1
+else:
+            horas_extras = int(horas_extras)
+
+total_pagamento = 15 + (horas_extras * 5)
+
+print("Cobrança por horas extras aplicada.")
+print("Horas extras:", horas_extras)
+
+    
+tag = input("\nVocê possui TAG?\n1 - Sim\n2 - Não\n")
+
 if tag == "1":
-        valor = valor * 0.9
-        print("Desconto de 10% para TAG aplicado.")
-print("Valor total a pagar: R$", valor,".")
-pago = input("Pagamento realizado? \n 1-sim \n 2-não \n")
-if pago == "1":
-        print("Pagamento confirmado. Cancela liberada.")
+        desconto = total_pagamento * 0.10
+        total_pagamento -= desconto
+        print("Desconto de 10% aplicado.")
+
 else:
-        print("Pagamento pendente. Saída bloqueada.")
+        print("Desconto não aplicado.")
+
+    
+ticket = input("\nVocê ainda possui o ticket?\n1 - Sim\n2 - Não\n")
+
+if ticket == "2":
+        total_pagamento += multa_ticket
+        print("Multa de R$50,00 aplicada.")
+
+else:
+        print("Tudo certo com o ticket.")
+
+    
+print(f"\nValor total a pagar: R$ {total_pagamento:.2f}")
+
+    
+pagamento = int(input("\nQual será a forma de pagamento?\n""1 - Crédito\n""2 - Débito\n""3 - PIX\n"))
+
+if pagamento in [1, 2, 3]:
+        print("Processando pagamento...")
+        time.sleep(2)
+
+        print("Pagamento realizado com sucesso!")
+        print("Tenha um bom dia!")
+
+else:
+        print("Forma de pagamento inválida.")
+
+
+
 
         
 
