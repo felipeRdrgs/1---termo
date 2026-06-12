@@ -42,9 +42,9 @@ def identificação_de_funcionario():
         print("Setor não reconhecido. Informe 1 ou 2.")
 
     resposta_epi = input("Você possui os itens listados acima? \n1- S \n2- N\n")
-    if resposta_epi == "1" or resposta_epi.upper() == "S":
+    if resposta_epi == "s":
         print("Exigências cumpridas.")
-    elif resposta_epi == "2" or resposta_epi.upper() == "N":
+    elif resposta_epi == "n":
         print("Você não possui os itens obrigatórios. Certifique-se de possuí-los.")
     else:
         print("Resposta inválida.")
@@ -66,6 +66,7 @@ else:
 total_funcionarios = 1
 funcionarios_treinados = 1 
 print(f"Total de funcionários cadastrados: {total_funcionarios} \nFuncionários com treinamentos em dia: {funcionarios_treinados}")
+
 
 
 
